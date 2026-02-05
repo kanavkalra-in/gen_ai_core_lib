@@ -9,7 +9,7 @@ lazy initialization and are created only when requested.
 This ensures core functionality is always available while keeping optional
 features lazy-loaded for better performance.
 """
-from typing import Optional, Callable, Any
+from typing import Optional, Callable, Any, TYPE_CHECKING
 from datetime import timedelta
 from functools import wraps
 import threading
@@ -30,9 +30,11 @@ from ..agents.agent_registry import AgentRegistry
 from ..tools.tool_registry import ToolRegistry
 from ..observability.metrics import MetricsCollector, InMemoryMetricsCollector
 from ..lifecycle.lifecycle_manager import LifecycleManager
-from ..plugins.plugin_registry import PluginRegistry
 from ..config.settings import settings
 from ..config.logging_config import logger
+
+if TYPE_CHECKING:
+    from ..plugins.plugin_registry import PluginRegistry
 
 
 def _lazy_property(initializer: Callable[[], Any]) -> property:
@@ -133,8 +135,9 @@ class ApplicationContainer:
         return registry
 
     @_lazy_property
-    def _plugin_registry(self) -> PluginRegistry:
+    def _plugin_registry(self) -> "PluginRegistry":
         """Initialize plugin registry on first access."""
+        from ..plugins.plugin_registry import PluginRegistry
         registry = PluginRegistry()
         self._initialized_services.add("plugin_registry")
         logger.info("Plugin registry initialized")
@@ -195,7 +198,7 @@ class ApplicationContainer:
         """Get the lifecycle manager (lazy-initialized)."""
         return self._lifecycle_manager
 
-    def get_plugin_registry(self) -> PluginRegistry:
+    def get_plugin_registry(self) -> "PluginRegistry":
         """Get the plugin registry (lazy-initialized)."""
         return self._plugin_registry
 
