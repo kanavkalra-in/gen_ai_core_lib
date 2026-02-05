@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "Core LLM, session, memory, and token utilities for GenAI applications and agents."
 readme = "README.md"
 requires-python = ">=3.9"
-license = { text = "MIT" }
+license = "MIT"
 authors = [
   { name = "Your Name", email = "you@example.com" }
 ]
@@ -33,3 +33,22 @@ google = [
 [project.urls]
 Homepage = "https://example.com/gen-ai-core-lib"
 
+[tool.setuptools]
+packages = [
+    "gen_ai_core_lib",
+    "gen_ai_core_lib.agents",
+    "gen_ai_core_lib.config",
+    "gen_ai_core_lib.dependencies",
+    "gen_ai_core_lib.lifecycle",
+    "gen_ai_core_lib.llm",
+    "gen_ai_core_lib.memory",
+    "gen_ai_core_lib.observability",
+    "gen_ai_core_lib.plugins",
+    "gen_ai_core_lib.session",
+    "gen_ai_core_lib.storage",
+    "gen_ai_core_lib.testing",
+    "gen_ai_core_lib.tools",
+    "gen_ai_core_lib.utils",
+    "gen_ai_core_lib.validation",
+]
+package-dir = {"gen_ai_core_lib" = "."}

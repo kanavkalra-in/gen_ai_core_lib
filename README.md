@@ -281,8 +281,12 @@ gen_ai_core_lib/
 - Core dependencies:
   - `python-dotenv >= 1.0.0`
   - `langchain-core >= 0.3.0`
-  - `langchain-openai >= 0.3.0`
+  - `langchain-openai >= 0.3.0` (requires `openai >= 2.0.0`)
   - `pydantic >= 2.0.0`
+
+### Note on OpenAI Version
+
+This library uses `langchain-openai >= 0.3.0`, which requires `openai >= 2.0.0`. If you need to use packages that require `openai < 2.0.0`, consider using separate virtual environments for different projects.
 
 ## Supported LLM Providers
 
